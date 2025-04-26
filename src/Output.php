@@ -26,10 +26,7 @@ class Output extends \QM_Output_Html
         /** @var Collector $data */
         $data = $this->collector->get_data()->opcache;
 
-        $this->before_non_tabular_output();
-
-        echo '<table>';
-        echo '<tbody>';
+        $this->before_tabular_output();
 
         echo '<thead>';
         echo '<tr>';
@@ -38,23 +35,19 @@ class Output extends \QM_Output_Html
         echo '</tr>';
         echo '</thead>';
 
-
         echo '<tbody>';
-        echo '<tr>';
 
         foreach ($data as $name => $value) {
             echo '<tr>';
-            echo '<th scope="row">'.esc_html($name).'</th>';
+            echo '<th scope="row"><code>'.esc_html($name).'<code></th>';
             echo '<td>';
-            echo esc_html(is_bool($value) ? ($value ? 'TRUE' : 'FALSE') : $value);
+            echo esc_html(is_bool($value) ? ($value ? 'TRUE' : 'FALSE') : (is_int($value) ? number_format_i18n($value) : $value));
             echo '</td>';
             echo '</tr>';
         }
 
-        echo '</tr>';
         echo '</tbody>';
-        echo '</table>';
 
-        $this->after_non_tabular_output();
+        $this->after_tabular_output();
     }
 }
