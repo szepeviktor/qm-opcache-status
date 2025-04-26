@@ -39,9 +39,11 @@ class Output extends \QM_Output_Html
 
         foreach ($data as $name => $value) {
             echo '<tr>';
-            echo '<th scope="row"><code>'.esc_html($name).'<code></th>';
+            echo '<th scope="row"><code>';
+            echo esc_html($name);
+            echo '<code></th>';
             echo '<td>';
-            echo esc_html(is_bool($value) ? ($value ? 'TRUE' : 'FALSE') : (is_int($value) ? number_format_i18n($value) : $value));
+            echo esc_html($this->formatValue($value));
             echo '</td>';
             echo '</tr>';
         }
@@ -49,5 +51,17 @@ class Output extends \QM_Output_Html
         echo '</tbody>';
 
         $this->after_tabular_output();
+    }
+
+    protected function formatValue($value): string
+    {
+        switch (true) {
+            case is_bool($value):
+                return $value ? 'TRUE' : 'FALSE';
+            case is_int($value):
+                return number_format_i18n($value);
+            default:
+                return (string)$value;
+        }
     }
 }
