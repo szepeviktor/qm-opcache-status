@@ -11,7 +11,7 @@ QM OPcache Status is a plugin for WordPress that integrates with the Query Monit
 
 ## Installation
 
-1. Download the plugin.
+1. Download [the plugin](https://github.com/szepeviktor/qm-opcache-status/archive/refs/heads/master.zip).
 2. Install it through the WordPress plugins page or upload it via FTP.
 3. Activate the plugin.
 
